@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictable Jumper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+</head>
+<body>
+
+<div id="snow-container"></div>
+
+<!-- ── HUD ──────────────────────────────────────── -->
+<div id="hud">
+    <div class="hud-l">
+        <button class="hbtn" onclick="returnToMenu()">&#8592; EXIT</button>
+        <button class="hbtn hbtn--pause" onclick="togglePause()">
+            <span id="pause-icon">⏸</span><span id="pause-lbl">PAUSE</span>
+        </button>
+    </div>
+    <div class="hud-c">
+        <div class="hud-chip">
+            <span class="chip-lbl">LVL</span>
+            <span class="chip-val" id="cur-lvl">—</span>
+        </div>
+    </div>
+    <div class="hud-r">
+        <div class="hud-chip hud-chip--deaths">
+            <span class="chip-lbl">DEATHS</span>
+            <span class="chip-val chip-val--deaths" id="death-count">0</span>
+        </div>
+    </div>
+</div>
+
+<!-- ── MENU ─────────────────────────────────────── -->
+<div id="menu" class="screen on">
+    <canvas id="menu-canvas"></canvas>
+    <div class="menu-content">
+        <header class="menu-header">
+            <h1 class="menu-title">Predictable<br><span class="menu-title-accent">Jumper</span></h1>
+            <p class="menu-sub">4 worlds &nbsp;·&nbsp; 20 levels</p>
+        </header>
+
+        <!-- All 20 levels visible at once — 4 rows of 5 -->
+        <div class="all-levels-grid" id="all-levels-grid"></div>
+
+
+    </div>
+</div>
+
+<!-- ── PAUSE ─────────────────────────────────────── -->
+<div id="pause-overlay" class="modal-bg">
+    <div class="modal-card">
+        <p class="modal-eyebrow">PAUSED</p>
+        <div class="modal-rule"></div>
+        <button class="solid-btn" onclick="togglePause()">▶&ensp;RESUME</button>
+        <button class="ghost-btn" onclick="returnToMenu()">MAIN MENU</button>
+    </div>
+</div>
+
+<!-- ── RESULT ─────────────────────────────────────── -->
+<div id="result-overlay" class="modal-bg">
+    <div class="result-card modal-card">
+        <div class="result-badge">
+            <span class="result-badge-star">★</span>
+            <span class="result-badge-label">LEVEL COMPLETE</span>
+        </div>
+        <h2 id="result-title" class="result-title">LEVEL 1</h2>
+        <div class="modal-rule"></div>
+        <!-- Levitating nav row -->
+        <div class="result-nav-row">
+            <div class="nav-item">
+                <button class="nav-btn nav-btn--side" id="btn-prev-lvl">&#8592;</button>
+                <span class="nav-label">PREV</span>
+            </div>
+            <div class="nav-item">
+                <button class="nav-btn nav-btn--replay" id="btn-replay">&#8635;</button>
+                <span class="nav-label">REPLAY</span>
+            </div>
+            <div class="nav-item">
+                <button class="nav-btn nav-btn--side" id="btn-next-lvl">&#8594;</button>
+                <span class="nav-label">NEXT</span>
+            </div>
+        </div>
+        <button class="ghost-btn ghost-btn--muted result-menu-btn" id="btn-result-menu" onclick="returnToMenu()">MAIN MENU</button>
+    </div>
+</div>
+
+<div id="gc"></div>
+<script src="main.js"></script>
+</body>
+</html>
